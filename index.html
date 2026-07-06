@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f3eb">
+  <meta name="description" content="안계고등학교 오늘의 급식 정보">
+  <title>안계고 오늘의 급식</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+    :root{font-family:'Noto Sans KR',sans-serif;color:#303630;background:#f7f3eb}*{box-sizing:border-box}
+    body{margin:0;min-width:320px;min-height:100vh}button,select,input{font:inherit}
+    .page{min-height:100vh;padding:50px 20px 30px;background:radial-gradient(circle at 10% 12%,#ecb3942b,transparent 25%),radial-gradient(circle at 91% 75%,#8fb39a33,transparent 28%),#f7f3eb}
+    header,.card,footer{width:min(100%,680px);margin:auto}header{display:flex;align-items:center;gap:14px;margin-bottom:25px}
+    .logo{display:grid;place-items:center;width:50px;height:50px;border-radius:16px;color:white;background:#78917c;font-size:22px;box-shadow:0 7px 20px #54705933}
+    .eyebrow{margin:0 0 3px;font-size:10px;font-weight:800;letter-spacing:.2em;color:#9c7f6f}h1{margin:0;font:400 clamp(25px,6vw,34px) 'Gowun Dodum';color:#29312b}
+    .card{padding:clamp(23px,5vw,42px);border:1px solid #ffffffe6;border-radius:30px;background:#fffefae8;box-shadow:0 26px 70px #4f53461f,0 3px 10px #4f53460d}
+    .topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;font-size:12px}.hello{color:#b17b63;font-weight:700}.school{padding:6px 10px;border-radius:999px;color:#6d806f;background:#edf2e9;font-weight:600}
+    .date-nav{display:grid;grid-template-columns:48px 1fr 48px;gap:14px;align-items:center}.arrow{width:48px;height:48px;border:1px solid #e6e3db;border-radius:15px;background:white;cursor:pointer;font-size:25px;transition:.2s}.arrow:hover{transform:translateY(-2px);border-color:#9eb0a1;color:#5d7862}
+    .date{text-align:center}.date p{margin:0 0 5px;color:#9c7f6f;font-size:13px;font-weight:700}.date h2{margin:0;font:400 clamp(23px,5vw,31px) 'Gowun Dodum';letter-spacing:-.04em}
+    .controls{display:grid;grid-template-columns:1fr 1.35fr;gap:12px;margin-top:30px}.field>span{display:block;margin:0 0 8px 4px;color:#85877f;font-size:11px;font-weight:700}
+    select,.date-wrap{width:100%;height:49px;border:1px solid #e5e2d9;border-radius:14px;background:#faf9f5;outline:none}select{padding:0 14px}.date-wrap{display:flex;align-items:center;gap:8px;padding:0 14px}.date-wrap input{width:100%;border:0;outline:0;background:transparent;color:#40463f}
+    select:focus,.date-wrap:focus-within{border-color:#8da392;box-shadow:0 0 0 3px #7e99841f}.divider{height:1px;margin:31px 0 26px;background:#e4e0d7}
+    .menu-head{display:flex;justify-content:space-between;align-items:center;gap:14px}.kicker{margin:0 0 3px;color:#b5846d;font-size:9px;font-weight:800;letter-spacing:.18em}.menu-head h3{margin:0;font:400 23px 'Gowun Dodum'}
+    .cal{padding:7px 12px;border:1px solid #e8d8c9;border-radius:999px;color:#a16e58;background:#fff8f2;font-size:12px;font-weight:700}.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 24px;margin:24px 0 0;padding:0;list-style:none}
+    .menu li{display:flex;align-items:baseline;gap:11px;padding:11px 3px;border-bottom:1px dashed #e9e5dc;font-size:14px;line-height:1.55}.num{color:#a7b2a6;font:italic 11px Georgia}
+    .state{display:flex;min-height:190px;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#777d76}.state p{margin:10px 0 0;font-size:14px}.state small{margin-top:6px;color:#a1a29c}.icon{font-size:31px}.spinner{width:30px;height:30px;border:3px solid #e4e9e2;border-top-color:#78917c;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .retry{margin-top:14px;padding:9px 14px;border:0;border-radius:10px;color:white;background:#78917c;cursor:pointer}footer{display:flex;justify-content:space-between;gap:15px;padding:22px 10px 0;color:#91948d;font-size:10px}footer p{margin:0}
+    @media(max-width:560px){.page{padding:28px 15px 22px}.card{border-radius:23px}.date-nav{grid-template-columns:43px 1fr 43px;gap:7px}.arrow{width:43px;height:43px}.controls,.menu{grid-template-columns:1fr}.menu{gap:2px}footer{flex-direction:column;align-items:center;gap:4px;text-align:center}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header><div class="logo">🍴</div><div><p class="eyebrow">ANGYE HIGH SCHOOL</p><h1>안계고 오늘의 급식</h1></div></header>
+    <section class="card" aria-live="polite">
+      <div class="topline"><span class="hello">오늘도 맛있는 하루</span><span class="school">안계고등학교</span></div>
+      <div class="date-nav">
+        <button class="arrow" id="prev" aria-label="전날 급식 보기">‹</button>
+        <div class="date"><p id="weekday"></p><h2 id="displayDate"></h2></div>
+        <button class="arrow" id="next" aria-label="다음날 급식 보기">›</button>
+      </div>
+      <div class="controls">
+        <label class="field"><span>급식 선택</span><select id="mealType"><option>조식</option><option selected>중식</option><option>석식</option></select></label>
+        <label class="field"><span>날짜 선택</span><div class="date-wrap"><span>📅</span><input id="dateInput" type="date"></div></label>
+      </div>
+      <div class="divider"></div>
+      <div class="menu-head"><div><p class="kicker">TODAY'S MENU</p><h3><span id="mealTitle">중식</span> 메뉴</h3></div><span class="cal" id="calorie" hidden></span></div>
+      <div id="content" class="state"><span class="spinner"></span><p>맛있는 메뉴를 불러오는 중이에요</p></div>
+    </section>
+    <footer><p>식단 정보는 학교 사정에 따라 변경될 수 있습니다.</p><span>NEIS 교육정보 개방 포털 제공</span></footer>
+  </main>
+  <script>
+    const API='https://open.neis.go.kr/hub/mealServiceDietInfo';
+    let selectedDate=localDate(new Date()),selectedMealType='중식',meals=[];
+    const $=id=>document.getElementById(id);
+    function localDate(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+    function dateObject(v){const [y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d)}
+    function showDate(){const d=dateObject(selectedDate);$('dateInput').value=selectedDate;$('displayDate').textContent=new Intl.DateTimeFormat('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'}).format(d);$('weekday').textContent=new Intl.DateTimeFormat('ko-KR',{weekday:'long'}).format(d)}
+    function render(){const meal=meals.find(m=>m.MMEAL_SC_NM===selectedMealType);$('mealTitle').textContent=selectedMealType;$('calorie').hidden=!meal?.CAL_INFO;$('calorie').textContent=meal?.CAL_INFO||'';const items=(meal?.DDISH_NM||'').split(/<br\s*\/?\s*>/i).map(x=>x.replace(/&amp;/g,'&').trim()).filter(Boolean);$('content').className=items.length?'':'state';$('content').innerHTML=items.length?`<ul class="menu">${items.map((x,i)=>`<li><span class="num">${String(i+1).padStart(2,'0')}</span><span>${x}</span></li>`).join('')}</ul>`:'<span class="icon">🍽️</span><p>등록된 급식 정보가 없습니다.</p><small>다른 날짜나 급식 종류를 선택해 보세요.</small>'}
+    async function load(){showDate();$('content').className='state';$('content').innerHTML='<span class="spinner"></span><p>맛있는 메뉴를 불러오는 중이에요</p>';$('calorie').hidden=true;const q=new URLSearchParams({Type:'json',ATPT_OFCDC_SC_CODE:'R10',SD_SCHUL_CODE:'8750467',MLSV_YMD:selectedDate.replaceAll('-','')});try{const r=await fetch(`${API}?${q}`);if(!r.ok)throw Error();const data=await r.json();const result=data.RESULT||data.mealServiceDietInfo?.[0]?.head?.find(x=>x.RESULT)?.RESULT;if(result&&result.CODE!=='INFO-000'&&result.CODE!=='INFO-200')throw Error(result.MESSAGE);meals=data.mealServiceDietInfo?.[1]?.row||[];render()}catch(e){meals=[];$('content').className='state';$('content').innerHTML=`<p>${e.message||'급식 정보를 불러오지 못했습니다. 네트워크 연결을 확인해 주세요.'}</p><button class="retry" onclick="load()">↻ 다시 시도</button>`}}
+    function move(n){const d=dateObject(selectedDate);d.setDate(d.getDate()+n);selectedDate=localDate(d);load()}
+    $('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('dateInput').onchange=e=>{if(e.target.value){selectedDate=e.target.value;load()}};$('mealType').onchange=e=>{selectedMealType=e.target.value;render()};
+    load();
+  </script>
+</body>
+</html>
