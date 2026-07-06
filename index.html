@@ -60,7 +60,7 @@
     async function load(){showDate();$('content').className='state';$('content').innerHTML='<span class="spinner"></span><p>맛있는 메뉴를 불러오는 중이에요</p>';$('calorie').hidden=true;const q=new URLSearchParams({Type:'json',ATPT_OFCDC_SC_CODE:'R10',SD_SCHUL_CODE:'8750467',MLSV_YMD:selectedDate.replaceAll('-','')});try{const r=await fetch(`${API}?${q}`);if(!r.ok)throw Error();const data=await r.json();const result=data.RESULT||data.mealServiceDietInfo?.[0]?.head?.find(x=>x.RESULT)?.RESULT;if(result&&result.CODE!=='INFO-000'&&result.CODE!=='INFO-200')throw Error(result.MESSAGE);meals=data.mealServiceDietInfo?.[1]?.row||[];render()}catch(e){meals=[];$('content').className='state';$('content').innerHTML=`<p>${e.message||'급식 정보를 불러오지 못했습니다. 네트워크 연결을 확인해 주세요.'}</p><button class="retry" onclick="load()">↻ 다시 시도</button>`}}
     function move(n){const d=dateObject(selectedDate);d.setDate(d.getDate()+n);selectedDate=localDate(d);load()}
     $('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('dateInput').onchange=e=>{if(e.target.value){selectedDate=e.target.value;load()}};$('mealType').onchange=e=>{selectedMealType=e.target.value;render()};
-    load();
+    load(); 
   </script>
 </body>
 </html>
